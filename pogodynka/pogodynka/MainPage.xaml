@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pogodynka.MainPage"
+             
+             >
+    <ContentPage.Resources>
+        <Style TargetType="Frame" x:Key="InfoFrame">
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Margin" Value="20,10,20,10"/>
+            <Setter Property="WidthRequest" Value="140"/>
+            <Setter Property="Background">
+                <LinearGradientBrush>
+                    <GradientStop Color="#62a1c7" Offset="0"/>
+                    <GradientStop Color="#15719f" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter>
+            
+            <Setter Property="BorderColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            
+        </Style>
+        <Style TargetType="StackLayout" x:Key="InfoStackLayout">
+            <Setter Property="Margin" Value="15,0,0,0"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid >
+        <Grid.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#95d6ea" Offset="0"/>
+                <GradientStop Color="#63b8ff" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <SearchBar x:Name="SB" Text="Limanowa" CancelButtonColor="White" Margin="5,5,0,0" TextColor="White">
+            
+            <SearchBar.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#62a1c7" Offset="0"/>
+                    <GradientStop Color="#63b8ff" Offset="1"/>
+                </LinearGradientBrush>
+            </SearchBar.Background>
+        </SearchBar>
+        <Button Text="search" Clicked="Button_Clicked" Grid.Column="1" HorizontalOptions="EndAndExpand" Margin="0,5,5,0">
+            <Button.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#62a1c7" Offset="0"/>
+                    <GradientStop Color="#63b8ff" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
+            <Frame Margin="20,30,20,30" BackgroundColor="Transparent">
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="Miasto" FontSize="30" TextColor="White" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="SearchedCity" TextColor="White" HorizontalTextAlignment="Center"/>
+                    <Image x:Name="I_WeatherIcon" Aspect="AspectFill" HeightRequest="60" WidthRequest="60"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label x:Name="Lbl_Temp" TextColor="White" FontSize="25"/>
+                        <Label Text="C°" FontSize="25" TextColor="White"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Od" FontSize="15" TextColor="White"/>
+                        <Label x:Name="Lbl_Min_Temp" FontSize="15" TextColor="White"/>
+                        <Label Text="C°" FontSize="15" TextColor="White"/>
+                        <Label Text="do" FontSize="15" TextColor="white" />
+                        <Label x:Name="Lbl_Max_Temp" FontSize="15" TextColor="White"/>
+                        <Label Text="C°" FontSize="15" TextColor="White"/>
+                    </StackLayout>
+                    <Label x:Name="Condition" TextColor="White" HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+           
+            <Frame Style="{DynamicResource InfoFrame}">
+                <StackLayout Style="{DynamicResource InfoStackLayout}" Padding="10">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Wschód słońca:"/>
+                        <Label x:Name="Sunrise" TextColor="White"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Zachód słońca: "/>
+                        <Label x:Name="Sunset" TextColor="White"/>
+                    </StackLayout>
+                    
+                    
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource InfoFrame}">
+                <StackLayout Style="{DynamicResource InfoStackLayout}" Padding="10">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Prędkość wiatru:"/>
+                        <Label x:Name="Windspeed" TextColor="White"/>
+                        <Label Text="m/s"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Ciśnienie:"/>
+                        <Label x:Name="Pressure" TextColor="White"/>
+                        <Label Text="PA"/>
+                    </StackLayout>
+                    
+                </StackLayout>
+            </Frame>
+            <Frame Style="{DynamicResource InfoFrame}">
+                <CarouselView x:Name="CV_Weather_LongTerm" PeekAreaInsets="100" Margin="5">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding Weather_Main}"/>
+                                <Label Text="{Binding Weather_descritpion}"/>
+
+                                <Image Source="{Binding Weather_icon}" HeightRequest="50" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Main_Temp}" FontSize="20" TextColor="White"/>
+                                    <Label Text="C°" FontSize="20" TextColor="White"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+
+
+                                    <Label Text="{Binding Wind_Speed}"/>
+                                    <Label Text="m/s"/>
+                                </StackLayout>
+                                <Label Text="{Binding Day}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+            </Frame>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
